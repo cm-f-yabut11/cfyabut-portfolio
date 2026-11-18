@@ -35,9 +35,23 @@ By default the contact form opens the visitor's email app. To get messages in yo
 ## Things to replace before sharing
 
 - **Recommendations page:** the four cards are lorem ipsum samples. Replace them in `index.html` (search for `class="quote"`) with real quotes from people who agreed to be featured, and remove the `Sample` tags.
+- **Case studies:** the 303 Apparel and KainSaan pages use screenshots from your project documents. Swap them in `assets/img/case/` if you take better ones.
 - **RiderSafe link:** add a link if the site is still online.
 - **Role lines:** add a line or two on what you did in each project.
 
 ## Changing content
 
 Everything is in `index.html`. Each page is a `<div data-view="...">`. Add a new page by adding a view with a new name and a link such as `<a href="#name">` in the nav. Use only letters, numbers, and hyphens in the name.
+
+## Link preview card
+
+`assets/img/og-card.png` is the image shown when the site is shared on LinkedIn, Messenger, and similar apps. The `og:url`, `og:image`, and `canonical` tags in `index.html` point to `https://cfyabut-portfolio.onrender.com/`. If you ever move the site to another address, update those three tags.
+
+## Resume and 404 page
+
+- `assets/Clarence-Yabut-Resume.pdf` is the file behind the "Download resume" links. Replace it with a new PDF of the same name whenever you update your resume.
+- `404.html` is shown by Render for any address that does not exist.
+
+## Accessibility notes
+
+The site has a skip link, visible keyboard focus, labelled forms and buttons, alt text on images, and respects the visitor's reduced motion setting. Run Lighthouse in Chrome DevTools after each big change to re-check.

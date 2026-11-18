@@ -10,6 +10,15 @@
 <meta property="og:title" content="Clarence Matthew Yabut, Web Developer">
 <meta property="og:description" content="Full-stack web projects, certifications, and contact details.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://cfyabut-portfolio.onrender.com/">
+<meta property="og:url" content="https://cfyabut-portfolio.onrender.com/">
+<meta property="og:image" content="https://cfyabut-portfolio.onrender.com/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Clarence Yabut, web developer">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -23,10 +32,12 @@
   <canvas id="gcv" aria-hidden="true"></canvas>
   <p id="ghud">Built 0 of 10. Lives: ●●●</p>
 </div>
-<div id="lb" hidden><img alt=""><button class="pill" type="button" id="lbx">Close</button></div>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Enlarged image" hidden><img alt=""><button class="pill" type="button" id="lbx">Close</button></div>
 <div id="prog" aria-hidden="true"></div>
+<div id="ring" aria-hidden="true"></div>
 <div class="eyes" id="eyes" aria-hidden="true"></div>
 <div class="wrap">
+  <button class="skip" type="button" id="skip">Skip to content</button>
   <header class="top">
     <a class="logo" href="#home" aria-label="Clarence Yabut, home"><svg viewBox="125 200 385 180" fill="none" stroke-width="14" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path d="M245 217 L160 292 L245 367" stroke="currentColor"/><path class="sl" d="M335 217 L268 367" stroke="var(--accent)"/><path d="M358 218 L413 270 M497 215 L347 367" stroke="currentColor"/></svg></a>
     <nav aria-label="Main">
@@ -39,7 +50,7 @@
     <button class="pill" type="button" data-theme-toggle>Dark mode</button>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <div data-view="home" data-title="Home">
       <div class="hero">
         <svg class="hero-mark" viewBox="125 200 385 180" fill="none" stroke-width="10" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path pathLength="1" d="M245 217 L160 292 L245 367" stroke="currentColor"/><path pathLength="1" d="M335 217 L268 367" stroke="var(--accent)"/><path pathLength="1" d="M358 218 L413 270" stroke="currentColor"/><path pathLength="1" d="M497 215 L347 367" stroke="currentColor"/></svg>
@@ -52,32 +63,34 @@
         <h2>Recent projects</h2>
         <ul class="big-links">
           <li><a href="#ridersafe">RiderSafe<small>Rider safety app</small></a></li>
-          <li><a href="#work">303 Apparel<small>E-commerce store</small></a></li>
-          <li><a href="#work">KainSaan<small>Restaurant finder</small></a></li>
+          <li><a href="#apparel-303">303 Apparel<small>E-commerce store</small></a></li>
+          <li><a href="#kainsaan">KainSaan<small>Restaurant finder</small></a></li>
         </ul>
         <h2>At a glance</h2>
-        <div class="cols facts">
-          <div><b>Studying</b><p>BSIT, Web Development at Holy Angel University, graduating in 2028.</p></div>
-          <div><b>Looking for</b><p>Entry-level, part-time, freelance, and work-from-home roles.</p></div>
-          <div><b>Speaking</b><p>English, Filipino, and Kapampangan.</p></div>
-          <div><b>Currently</b><p>Rewriting Budgetly, a budgeting app, in JavaScript with MongoDB.</p></div>
-        </div>
+        <dl class="glance">
+          <div><dt>Studying</dt><dd>BSIT, Web Development at Holy Angel University, graduating in 2028.</dd></div>
+          <div><dt>Looking for</dt><dd>Entry-level, part-time, freelance, and work-from-home roles.</dd></div>
+          <div><dt>Speaking</dt><dd>English, Filipino, and Kapampangan.</dd></div>
+          <div><dt>Currently</dt><dd>Rewriting Budgetly, a budgeting app, in JavaScript with MongoDB.</dd></div>
+        </dl>
       </div>
     </div>
 
     <div class="page" data-view="work" data-title="Work" hidden>
-      <h1 tabindex="-1">Work</h1>
+      <div class="phead"><div><h1 tabindex="-1">Work</h1><p class="kicker">Three projects I led, plus coursework.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M14 24 H94 V84 H14 Z" style="animation-delay:.1s"/><path pathLength="1" d="M10 20 H90 V80 H10 Z" style="animation-delay:0.15s"/><path pathLength="1" d="M10 34 H90" stroke-width="3" style="animation-delay:0.26s"/><path class="fx" d="M18 25 h4 v4 h-4 z" fill="currentColor" stroke="none" style="animation-delay:0.37s"/><path class="fx" d="M26 25 h4 v4 h-4 z" fill="currentColor" stroke="none" style="animation-delay:0.48s"/><path class="fx" d="M34 25 h4 v4 h-4 z" fill="currentColor" stroke="none" style="animation-delay:0.59s"/><path pathLength="1" d="M32 46 L22 54 L32 62" style="animation-delay:0.7s"/><path pathLength="1" d="M49 44 L41 64" class="acc" stroke="var(--accent)" style="animation-delay:0.81s"/><path pathLength="1" d="M58 46 L68 54 L58 62" style="animation-delay:0.92s"/><path class="fx acc" d="M72 58 V84 L79 77 L84 88 L89 86 L84 75 L93 75 Z" fill="var(--paper)" stroke="var(--accent)" stroke-width="4" style="animation-delay:1.03s"/></svg></div>
       <article class="project">
         <div><h3>RiderSafe</h3><p class="meta">Academic project that I led. PHP, MySQL, JavaScript, and AJAX.</p><button class="zoom" type="button" aria-label="View the RiderSafe logo larger"><img class="thumb sq" src="assets/img/ridersafe-logo.jpg" alt="RiderSafe logo: a blue motorcycle helmet on a map pin with a green check mark" width="640" height="640" loading="lazy"></button></div>
-        <div><p>A motorcycle rider safety app with scheduled GPS check-ins and an emergency SOS. It was deployed and stayed public for several months.</p><a href="#ridersafe">Read the case study</a></div>
+        <div><p>A motorcycle rider safety app with scheduled GPS check-ins and an emergency SOS. It was deployed and stayed public for several months.</p><a href="#ridersafe" aria-label="Read the RiderSafe case study">Read the case study</a></div>
       </article>
       <article class="project">
         <div><h3>303 Apparel</h3><p class="meta">Group project with five classmates, led by me. HTML, CSS, JavaScript, Node.js, Express, and MongoDB.</p><button class="zoom" type="button" aria-label="View the 303 Apparel logo larger"><img class="thumb sq" src="assets/img/303-apparel-logo.jpg" alt="303 Apparel logo: a cream square frame with the brand name in bold type on navy" width="640" height="640" loading="lazy"></button></div>
-        <div><p>A full-stack apparel store with a product catalog, search and filters, a cart and checkout, promo codes, and an admin dashboard for managing products, customers, and messages. It’s a demo store built for class, so nothing is actually sold.</p><a href="https://three03apparel-store.onrender.com/index.html" target="_blank" rel="noopener">Live demo</a>&emsp;<a href="https://github.com/thebeancheese/303apparel-store" target="_blank" rel="noopener">GitHub</a></div>
+        <div><p>A full-stack apparel store with a product catalog, search and filters, a cart and checkout, promo codes, and an admin dashboard for managing products, customers, and messages. It’s a demo store built for class, so nothing is actually sold.</p><a href="#apparel-303" aria-label="Read the 303 Apparel case study">Read the case study</a>&emsp;<a href="https://three03apparel-store.onrender.com/index.html" target="_blank" rel="noopener" aria-label="303 Apparel live demo">Live demo</a>&emsp;<a href="https://github.com/thebeancheese/303apparel-store" target="_blank" rel="noopener" aria-label="303 Apparel on GitHub">GitHub</a>
+          <div class="strip-wrap"><div class="strip" tabindex="0" role="group" aria-label="303 Apparel screenshots"><button class="zoom" type="button" aria-label="View larger: Home page"><img src="assets/img/case/a303-hero.jpg" alt="303 Apparel home page with the headline Stay Ahead of the Trend" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Products page"><img src="assets/img/case/a303-products.jpg" alt="The 303 Apparel products page with search, sorting, and category filters" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Campaign page"><img src="assets/img/case/a303-campaign.jpg" alt="The Cop the Drop social media campaign page" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Staff dashboard"><img src="assets/img/case/a303-admin.jpg" alt="The 303 Apparel staff dashboard" loading="lazy" decoding="async"></button></div><div class="strip-ctl"><button class="pill" type="button" data-strip="-1">Previous</button><button class="pill" type="button" data-strip="1">Next</button></div></div></div>
       </article>
       <article class="project">
         <div><h3>KainSaan</h3><p class="meta">Group project with two classmates, led by me. Express and MongoDB, deployed on Render.</p><button class="zoom" type="button" aria-label="View the KainSaan logo larger"><img class="thumb sq" src="assets/img/kainsaan-logo.jpg" alt="KainSaan logo: a red map pin with a small yellow jeepney on top, on teal" width="640" height="640" loading="lazy"></button></div>
-        <div><p>A restaurant finder that helps people decide where to eat. Visitors browse restaurants and cuisines, and there’s an admin page for the data.</p><a href="https://kainsaan.onrender.com/" target="_blank" rel="noopener">Live site</a></div>
+        <div><p>A restaurant finder that helps people decide where to eat. Visitors browse restaurants and cuisines, and there’s an admin page for the data.</p><a href="#kainsaan" aria-label="Read the KainSaan case study">Read the case study</a>&emsp;<a href="https://kainsaan.onrender.com/" target="_blank" rel="noopener" aria-label="KainSaan live site">Live site</a>
+          <div class="strip-wrap"><div class="strip" tabindex="0" role="group" aria-label="KainSaan screenshots"><button class="zoom" type="button" aria-label="View larger: Home page"><img src="assets/img/case/ks-home.jpg" alt="The KainSaan home page with a red map pin button" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Restaurants page"><img src="assets/img/case/ks-restaurants.jpg" alt="The KainSaan restaurants page with search, filter, and sorting" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Add restaurant form"><img src="assets/img/case/ks-add.jpg" alt="The add restaurant form on the admin page" loading="lazy" decoding="async"></button><button class="zoom" type="button" aria-label="View larger: Database in MongoDB Compass"><img src="assets/img/case/ks-database.jpg" alt="MongoDB Compass showing the restaurants collection" loading="lazy" decoding="async"></button></div><div class="strip-ctl"><button class="pill" type="button" data-strip="-1">Previous</button><button class="pill" type="button" data-strip="1">Next</button></div></div></div>
       </article>
       <article class="project">
         <div><h3>Coursework projects</h3><p class="meta">HTML, CSS, JavaScript, PHP, Java, Python, SQL, MongoDB</p></div>
@@ -114,8 +127,41 @@
       <p>Built with PHP, MySQL, JavaScript, HTML, CSS, AJAX, Google Maps, and the HTML5 Geolocation API.</p>
     </div>
 
+    <div class="page" data-view="apparel-303" data-title="303 Apparel" hidden>
+      <a class="back" href="#work">Back to work</a>
+      <div class="phead"><div><h1 tabindex="-1">303 Apparel</h1><p class="kicker">A clothing store, a campaign, and an admin area, built by six of us.</p></div></div>
+      <dl class="meta-grid"><div><dt>My role</dt><dd>Project lead</dd></div><div><dt>Team</dt><dd>Six classmates</dd></div><div><dt>Context</dt><dd>Final requirement, WD-303, Holy Angel University, October 2026</dd></div><div><dt>Built with</dt><dd>HTML, CSS, JavaScript, Node.js, Express, MongoDB</dd></div><div><dt>Links</dt><dd><a href="https://three03apparel-store.onrender.com/index.html" target="_blank" rel="noopener">Live demo</a>&emsp;<a href="https://github.com/thebeancheese/303apparel-store" target="_blank" rel="noopener">GitHub</a></dd></div></dl>
+      <p>303 Apparel is a make-believe clothing brand for students and young adults, with the tagline “Don’t follow the trend, set it.” For our final requirement we built the whole business around it: an online store, a social media campaign, an email newsletter, and a staff area to run it all. It’s a demo, so nothing is actually sold.</p>
+      <div class="shots"><figure><button class="zoom" type="button" aria-label="View larger: The home page"><img class="shot" src="assets/img/case/a303-hero.jpg" alt="303 Apparel home page with the headline Stay Ahead of the Trend and a 15 percent off banner" loading="lazy"></button><figcaption>The home page</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: Products, with search, sorting, and filters"><img class="shot" src="assets/img/case/a303-products.jpg" alt="The 303 Apparel products page with search, sorting, category filters, and a grid of clothing" loading="lazy"></button><figcaption>Products, with search, sorting, and filters</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: The “Cop the Drop” campaign page"><img class="shot" src="assets/img/case/a303-campaign.jpg" alt="The Cop the Drop social media campaign page with its overview and content schedule" loading="lazy"></button><figcaption>The “Cop the Drop” campaign page</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: The staff dashboard"><img class="shot" src="assets/img/case/a303-admin.jpg" alt="The 303 Apparel admin dashboard with a product form and a promo code form" loading="lazy"></button><figcaption>The staff dashboard</figcaption></figure></div>
+      <h2>What’s in it</h2>
+      <ul class="feat"><li>A landing page with a hero, a brochure, an about section, featured products, a promo with a countdown, and a promotional video.</li><li>A products page with search, sorting, category filters, and pagination, plus a cart and checkout that accepts a promo code.</li><li>The Fit Formula, a style guide infographic, and a Features page explaining why to shop.</li><li>A social media campaign page with the “Cop the Drop” plan, a four-week content schedule, and sample posts for each platform.</li><li>A contact form, an FAQ, and a signup for the drop list newsletter, alongside an email campaign we designed and sent.</li><li>A staff login and dashboard to add, edit, and delete products, feature them on the home page, manage the promo code, and read customers, messages, and subscribers.</li></ul>
+      <h2>My part</h2>
+      <p>I led the project. I came up with the concept, worked on the frontend, shot and edited the promotional video, and made the promotional posters.</p>
+      <h2>The team</h2>
+      <div class="cols">
+        <div><ul class="tl"><li><b>Manjot Chamdal</b><span>Database, documentation, FAQs and newsletter idea</span></li><li><b>Vince Raiezen Cruzada</b><span>Backend, deployment, CRUD functions</span></li><li><b>John Paul David</b><span>Frontend, brochure, email marketing</span></li></ul></div>
+        <div><ul class="tl"><li><b>Emilson Lio Madla</b><span>Infographics, email marketing, database integration</span></li><li><b>Erine Karl Gabriel Sicat</b><span>Documentation, website polish, photography and editing</span></li><li><b>Clarence Yabut</b><span>Concept, frontend, video, promotional posters</span></li></ul></div>
+      </div>
+    </div>
+
+    <div class="page" data-view="kainsaan" data-title="KainSaan" hidden>
+      <a class="back" href="#work">Back to work</a>
+      <div class="phead"><div><h1 tabindex="-1">KainSaan</h1><p class="kicker">A restaurant finder for Angeles City and Clark, backed by MongoDB.</p></div></div>
+      <dl class="meta-grid"><div><dt>My role</dt><dd>Project lead</dd></div><div><dt>Team</dt><dd>Three of us: John Paul David, Emilson Lio Madla, and me</dd></div><div><dt>Context</dt><dd>6ADDBASE, Advanced Database using MongoDB, October 2026</dd></div><div><dt>Built with</dt><dd>MongoDB Atlas, Node.js, Express, HTML, CSS, JavaScript</dd></div><div><dt>Links</dt><dd><a href="https://kainsaan.onrender.com/" target="_blank" rel="noopener">Live site</a>&emsp;<a href="https://github.com/johnpauldavid27/KainSaan-database-restore-main" target="_blank" rel="noopener">GitHub</a></dd></div></dl>
+      <p>The name plays on “Saan tayo kakain?”, Filipino for “where should we eat?” KainSaan lists 30 restaurants around Angeles City and Clark. Visitors can search by name, filter by cuisine, or press a map pin and let the site pick for them. Behind it is a MongoDB database that we designed, validated, and connected to a Node and Express server.</p>
+      <div class="shots"><figure><button class="zoom" type="button" aria-label="View larger: The home page"><img class="shot" src="assets/img/case/ks-home.jpg" alt="The KainSaan home page with the headline Saan tayo kakain and a red map pin button" loading="lazy"></button><figcaption>The home page</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: Restaurants, with search, filter, and sort"><img class="shot" src="assets/img/case/ks-restaurants.jpg" alt="The KainSaan restaurants page with search, cuisine filter, and sorting" loading="lazy"></button><figcaption>Restaurants, with search, filter, and sort</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: Adding a restaurant"><img class="shot" src="assets/img/case/ks-add.jpg" alt="The add restaurant form on the admin page" loading="lazy"></button><figcaption>Adding a restaurant</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: The restaurants collection in MongoDB Compass"><img class="shot" src="assets/img/case/ks-database.jpg" alt="MongoDB Compass showing documents in the restaurants collection" loading="lazy"></button><figcaption>The restaurants collection in MongoDB Compass</figcaption></figure></div>
+      <h2>What it does</h2>
+      <ul class="feat"><li>The home page has a search bar, a “Surprise me” pin that picks a restaurant at random, a top rated list, a recently added list, and cuisine tags.</li><li>The restaurants page has search by name, a cuisine filter, sorting, and page navigation. There are also cuisines and about pages, and a light and dark theme.</li><li>A separate admin page covers the full CRUD cycle: add, view, edit, and delete restaurants.</li><li>Deleting moves a restaurant to a trash collection first. From there it can be restored, deleted permanently, or left to expire automatically after 30 days.</li></ul>
+      <h2>The database</h2>
+      <ul class="feat"><li>One database, dbRestaurants, with a restaurants collection and a trash collection for deleted records.</li><li>Each restaurant stores an ID, name, cuisine, address, rating, and contact number. New records also get a created date, which powers the “recently added” list.</li><li>Schema validation requires all six fields and keeps ratings between 0 and 5.</li><li>A unique index on the restaurant ID, indexes on name and cuisine, and a time-to-live index that clears the trash after 30 days.</li></ul>
+      <h2>Problems we ran into</h2>
+      <ul class="feat"><li>The connection failed at first because we had used a placeholder cluster address instead of the real Atlas host.</li><li>We kept the database password out of the code and out of GitHub by moving it into an environment file, and moved the connection code into its own module.</li><li>The site first ran in a preview mode that only used browser storage, so we added Express routes to connect it to the real database.</li><li>File names with mixed capital letters broke on the Linux server, so we renamed everything to lowercase.</li><li>Restoring a deleted restaurant could reuse an ID that a new one had taken, so Restore now assigns the next free ID.</li></ul>
+      <h2>What I’d improve</h2>
+      <p>The admin page has no login yet, so anyone who knows its address can open it. I left its link off this site on purpose. Next I’d add a login, move search and pagination to the server, add photos and opening hours, and keep an activity log of changes.</p>
+    </div>
+
     <div class="page" data-view="about" data-title="About" hidden>
-      <h1 tabindex="-1">About</h1>
+      <div class="phead"><div><h1 tabindex="-1">About</h1><p class="kicker">A student developer who likes the whole stack.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M16 28 H92 V80 H16 Z" style="animation-delay:.1s"/><path pathLength="1" d="M12 24 H88 V76 H12 Z" style="animation-delay:0.15s"/><path pathLength="1" d="M20 32 H46 V68 H20 Z" stroke-width="3" style="animation-delay:0.26s"/><circle class="fx" cx="28" cy="45" r="4.2" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" style="animation-delay:0.37s"/><circle class="fx" cx="38" cy="45" r="4.2" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" style="animation-delay:0.48s"/><circle class="fx acc" cx="29" cy="46" r="1.8" fill="var(--accent)" stroke="none" style="animation-delay:0.59s"/><circle class="fx acc" cx="39" cy="46" r="1.8" fill="var(--accent)" stroke="none" style="animation-delay:0.7s"/><path pathLength="1" d="M22 68 L33 58 L44 68" stroke-width="3" style="animation-delay:0.81s"/><path pathLength="1" d="M54 36 H80" class="acc" stroke="var(--accent)" style="animation-delay:0.92s"/><path pathLength="1" d="M54 48 H78" style="animation-delay:1.03s"/><path pathLength="1" d="M54 60 H70" style="animation-delay:1.14s"/></svg></div>
       <p>I’m a third-year BSIT Web Development student at Holy Angel University. I build projects with HTML, CSS, JavaScript, PHP, and databases, and I also design in Figma and create content.</p>
       <p>Before tech, I worked at school bazaars and on a student council events team, which taught me sales, customer service, and working with a group. I speak English, Filipino, and Kapampangan.</p>
       <h2>Skills</h2>
@@ -131,9 +177,11 @@
     </div>
 
     <div class="page" data-view="certifications" data-title="Certifications" hidden>
-      <h1 tabindex="-1">Certifications</h1>
+      <div class="phead"><div><h1 tabindex="-1">Certifications</h1><p class="kicker">Courses I finished, newest first.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M54 14 L86 32 V64 L54 82 L22 64 V32 Z" style="animation-delay:.1s"/><path pathLength="1" d="M38 72 L34 92 L44 86 L48 92" style="animation-delay:0.15s"/><path pathLength="1" d="M62 72 L66 92 L56 86 L52 92" style="animation-delay:0.26s"/><path pathLength="1" d="M50 10 L82 28 V60 L50 78 L18 60 V28 Z" style="animation-delay:0.37s"/><path pathLength="1" d="M36 44 L46 54 L64 34" class="acc" stroke="var(--accent)" style="animation-delay:0.48s"/></svg></div>
       <div class="filters" role="group" aria-label="Filter certifications"><button class="pill" type="button" data-f="all" aria-pressed="true">All</button><button class="pill" type="button" data-f="web" aria-pressed="false">Web</button><button class="pill" type="button" data-f="creative" aria-pressed="false">Design and marketing</button><button class="pill" type="button" data-f="it" aria-pressed="false">IT</button></div>
       <ul class="cert">
+        <li><time>Oct 2026</time><div><b>Digital Advertising Certified</b><small>HubSpot Academy</small></div></li>
+        <li><time>Sep 2026</time><div><b>Endpoint Security</b><small>Cisco Networking Academy</small></div></li>
         <li><time>Aug 2026</time><div><b>Content Marketing Certified</b><small>HubSpot Academy</small></div></li>
         <li><time>Aug 2026</time><div><b>Introduction to Graphic Design; Basics of UI/UX</b><small>Simplilearn</small></div></li>
         <li><time>Aug 2026</time><div><b>Website UI/UX Designing using ChatGPT</b><small>Simplilearn</small></div></li>
@@ -145,8 +193,7 @@
     </div>
 
     <div class="page" data-view="recommendations" data-title="Recommendations" hidden>
-      <h1 tabindex="-1">Recommendations</h1>
-      <p>What the people I’ve worked with and learned from have to say.</p>
+      <div class="phead"><div><h1 tabindex="-1">Recommendations</h1><p class="kicker">Words from people I’ve worked with.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M14 20 H94 V68 H58 L38 88 V68 H14 Z" style="animation-delay:.1s"/><path pathLength="1" d="M10 16 H90 V64 H54 L34 84 V64 H10 Z" style="animation-delay:0.15s"/><path pathLength="1" d="M30 28 L24 46 M44 28 L38 46" class="acc" stroke="var(--accent)" style="animation-delay:0.26s"/><path pathLength="1" d="M58 32 H78" style="animation-delay:0.37s"/><path pathLength="1" d="M58 44 H72" style="animation-delay:0.48s"/></svg></div>
       <div class="filters" role="group" aria-label="Filter recommendations"><button class="pill" type="button" data-f="all" aria-pressed="true">All</button><button class="pill" type="button" data-f="faculty" aria-pressed="false">Faculty</button><button class="pill" type="button" data-f="stuco" aria-pressed="false">Student council</button><button class="pill" type="button" data-f="peers" aria-pressed="false">Classmates</button></div>
       <div class="quotes">
         <figure class="quote" data-g="faculty"><span class="tag">Sample</span><blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></blockquote><figcaption><b>Lorem Ipsum</b><span>Dolor sit amet, consectetur</span></figcaption></figure>
@@ -157,10 +204,10 @@
     </div>
 
     <div class="page" data-view="contact" data-title="Contact" hidden>
-      <h1 tabindex="-1">Contact</h1>
+      <div class="phead"><div><h1 tabindex="-1">Contact</h1><p class="kicker">Say hello, or tell me about a project.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M16 28 H92 V78 H16 Z" style="animation-delay:.1s"/><path pathLength="1" d="M12 24 H88 V74 H12 Z" style="animation-delay:0.15s"/><path pathLength="1" d="M12 24 L50 52 L88 24" class="acc" stroke="var(--accent)" style="animation-delay:0.26s"/><path pathLength="1" d="M12 74 L38 46 M88 74 L62 46" stroke-width="3" style="animation-delay:0.37s"/><circle class="fx acc" cx="88" cy="24" r="8" fill="var(--accent)" stroke="var(--paper)" stroke-width="4" style="animation-delay:0.48s"/></svg></div>
       <p>I’m open to entry-level, part-time, freelance, and work-from-home roles.</p>
       <a class="big" href="mailto:cmf.yabut@gmail.com">cmf.yabut@gmail.com</a>
-      <p><button class="pill" id="copy" type="button">Copy email</button> <span id="copied" aria-live="polite"></span></p>
+      <p><button class="pill" id="copy" type="button">Copy email</button>&emsp;<a class="dl" href="assets/Clarence-Yabut-Resume.pdf" download data-deploy-only>Download resume (PDF)</a> <span id="copied" aria-live="polite"></span></p>
       <p><a href="https://github.com/cm-f-yabut11" target="_blank" rel="noopener">GitHub</a>&emsp;<a href="https://www.linkedin.com/in/clarence-yabut-7a6819312/" target="_blank" rel="noopener">LinkedIn</a></p>
       <h2>Send a message</h2>
       <form class="cform" id="cform" novalidate>
@@ -178,7 +225,7 @@
     </div>
   </main>
 
-  <footer><span>© 2026 Clarence Matthew Yabut</span><div class="tools">
+  <footer><div class="now"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Angeles City, <b id="clock2">–</b>. Open to work.</span><a class="dl" href="assets/Clarence-Yabut-Resume.pdf" download data-deploy-only>Download resume</a></div><span>© 2026 Clarence Matthew Yabut</span><div class="tools">
       <button class="pill" id="eyeBtn" type="button" aria-pressed="true">Eyes on</button>
       <button class="pill" id="inspect" type="button" aria-pressed="false">Show page structure</button>
     </div><a id="next" href="#work">Next: Work</a></footer>

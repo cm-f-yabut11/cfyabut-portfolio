@@ -124,11 +124,12 @@ var FORM_ENDPOINT='';
   var ov=document.getElementById('game'),cv=document.getElementById('gcv'),cx=cv.getContext('2d'),wrapEl=document.querySelector('.wrap'),
       hud=document.getElementById('ghud'),gmsg=document.getElementById('gmsg'),gst=document.getElementById('gstart'),
       TOK=['</div>','</p>',';','}',')','</a>','</li>'],GOAL=10,gW=0,gH=0,px=0,items=[],fx=[],lives=3,score=0,sp=0,last=0,run=false,raf=0,keys={};
+  var musicStart=null,musicUnlock=null;
   function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
   function fit(){var d=window.devicePixelRatio||1;gW=Math.max(260,Math.min(ov.clientWidth-32,640));gH=Math.max(240,Math.min(innerHeight*.45,380));cv.style.width=gW+'px';cv.style.height=gH+'px';cv.width=gW*d;cv.height=gH*d;cx.setTransform(d,0,0,d,0,0)}
   var best=0,t0=0;try{best=parseFloat(localStorage.getItem('best'))||0}catch(e){}
   function hudUp(){hud.textContent='Built '+score+' of '+GOAL+'. Lives: '+'●'.repeat(lives)+'○'.repeat(3-lives)+(best?'. Best time: '+best.toFixed(1)+'s':'')}
-  function enter(){run=false;cancelAnimationFrame(raf);try{sessionStorage.setItem('played','1')}catch(e){}wrapEl.inert=false;document.body.classList.remove('gaming');ov.classList.add('out');setTimeout(function(){ov.hidden=true},500);route()}
+  function enter(won){run=false;cancelAnimationFrame(raf);try{sessionStorage.setItem('played','1')}catch(e){}wrapEl.inert=false;document.body.classList.remove('gaming');ov.classList.add('out');setTimeout(function(){ov.hidden=true},500);route();if(won===true&&musicStart)setTimeout(musicStart,350)}
   function drawBug(x,y,body,white,dark){
     cx.strokeStyle=body;cx.lineWidth=2;
     for(var i=-1;i<=1;i++){cx.beginPath();cx.moveTo(x-8,y+i*5);cx.lineTo(x-15,y+i*5+3);cx.moveTo(x+8,y+i*5);cx.lineTo(x+15,y+i*5+3);cx.stroke()}
@@ -157,7 +158,7 @@ var FORM_ENDPOINT='';
     if(cx.roundRect)cx.roundRect(px-38,py,76,26,6);else cx.rect(px-38,py,76,26);
     cx.fill();cx.stroke();cx.fillStyle=ink;cx.fillText('{ }',px,py+19);
     fx=fx.filter(function(f){f.t+=dt;if(f.t>.3)return false;cx.globalAlpha=1-f.t/.3;cx.strokeStyle=f.bug?bad:acc;cx.lineWidth=2;cx.beginPath();cx.arc(f.x,f.y,8+f.t*90,0,6.283);cx.stroke();cx.globalAlpha=1;return true});
-    if(score>=GOAL){run=false;found('game');var secs=(performance.now()-t0)/1000,nb=!best||secs<best;if(nb){best=secs;try{localStorage.setItem('best',String(secs))}catch(e){}}hudUp();gmsg.textContent='Build succeeded in '+secs.toFixed(1)+' seconds.'+(nb?' New best!':'')+' Opening the portfolio.';wink();setTimeout(enter,1500);return}
+    if(score>=GOAL){run=false;found('game');var secs=(performance.now()-t0)/1000,nb=!best||secs<best;if(nb){best=secs;try{localStorage.setItem('best',String(secs))}catch(e){}}hudUp();gmsg.textContent='Build succeeded in '+secs.toFixed(1)+' seconds.'+(nb?' New best!':'')+' Opening the portfolio.';wink();setTimeout(function(){enter(true)},1500);return}
     if(lives<=0){run=false;gmsg.textContent='Build failed: too many bugs.';gst.textContent='Try again';gst.hidden=false;return}
     raf=requestAnimationFrame(tick);
   }
@@ -165,8 +166,8 @@ var FORM_ENDPOINT='';
   cv.addEventListener('pointerdown',function(e){px=e.clientX-cv.getBoundingClientRect().left});
   addEventListener('keydown',function(e){if(run&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){keys[e.key]=true;e.preventDefault()}});
   addEventListener('keyup',function(e){keys[e.key]=false});
-  gst.addEventListener('click',start);
-  document.getElementById('gskip').addEventListener('click',enter);
+  gst.addEventListener('click',function(){if(musicUnlock)musicUnlock();start()});
+  document.getElementById('gskip').addEventListener('click',function(){enter(false)});
   hudUp();
   var skipG=false;try{skipG=sessionStorage.getItem('played')==='1'}catch(e){}
   if(location.hash&&location.hash!=='#home')skipG=true;
@@ -245,7 +246,7 @@ var FORM_ENDPOINT='';
   function initPlayer(list){
     list=(list||[]).map(toTrack);if(!list.length)return;
     pl.hidden=false;if(pl._restore)pl._restore();pn.hidden=pprev.hidden=list.length<2;if(list.length===1)au.loop=true;
-    var idx=0,vol=.6,bad=0,ctx=null,an=null,data=null,useAn=false,fq=0;
+    var idx=0,vol=.6,bad=0,ctx=null,an=null,data=null,useAn=false,fq=0,userMuted=false,probing=false,unlocked=false;
     try{var v=parseFloat(localStorage.getItem('pvol'));if(!isNaN(v))vol=v;idx=parseInt(localStorage.getItem('ptrack'),10)||0}catch(e){}
     if(idx>=list.length)idx=0;au.volume=vol;pv.value=vol;pbwrap.classList.add('css');
     function fmt(s){if(!isFinite(s)||s<0)return'0:00';s=Math.floor(s);return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
@@ -282,18 +283,30 @@ var FORM_ENDPOINT='';
     pp.addEventListener('click',function(){if(au.paused){ensureCtx();var p=au.play();if(p&&p.catch)p.catch(function(){})}else au.pause()});
     pn.addEventListener('click',function(){ensureCtx();load(idx+1,true)});
     pv.addEventListener('input',function(){au.volume=Number(pv.value);try{localStorage.setItem('pvol',pv.value)}catch(e){}});
-    au.addEventListener('playing',function(){bad=0;pl.classList.add('playing');pp.setAttribute('aria-label','Pause music');setBars(true);if('mediaSession' in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:list[idx].title,artist:'Clarence Yabut'})}catch(e){}}});
-    au.addEventListener('pause',function(){pl.classList.remove('playing');pp.setAttribute('aria-label','Play music');setBars(false)});
+    au.addEventListener('playing',function(){if(probing)return;bad=0;pl.classList.add('playing');pp.setAttribute('aria-label','Pause music');setBars(true);if('mediaSession' in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:list[idx].title,artist:'Clarence Yabut'})}catch(e){}}});
+    au.addEventListener('pause',function(){if(probing){probing=false;return}pl.classList.remove('playing');pp.setAttribute('aria-label','Play music');setBars(false)});
     var seeking=false;
     au.addEventListener('loadedmetadata',function(){tdur.textContent=fmt(au.duration);seek.disabled=!isFinite(au.duration)});
     au.addEventListener('timeupdate',function(){if(isFinite(au.duration)&&au.duration>0){if(!seeking)seek.value=au.currentTime/au.duration*1000;tdur.textContent=fmt(au.duration)}if(!seeking)tcur.textContent=fmt(au.currentTime)});
     seek.addEventListener('input',function(){seeking=true;if(isFinite(au.duration))tcur.textContent=fmt(seek.value/1000*au.duration)});
     seek.addEventListener('change',function(){if(isFinite(au.duration))au.currentTime=seek.value/1000*au.duration;seeking=false});
     pprev.addEventListener('click',function(){ensureCtx();if(au.currentTime>3)au.currentTime=0;else load(idx-1,true)});
-    pmute.addEventListener('click',function(){au.muted=!au.muted;pmute.setAttribute('aria-pressed',String(au.muted));pmute.setAttribute('aria-label',au.muted?'Unmute':'Mute')});
+    pmute.addEventListener('click',function(){au.muted=!au.muted;userMuted=au.muted;pmute.setAttribute('aria-pressed',String(au.muted));pmute.setAttribute('aria-label',au.muted?'Unmute':'Mute')});
     au.addEventListener('ended',function(){load(idx+1,true)});
     au.addEventListener('error',function(){bad++;if(bad>=list.length){pt.textContent='Audio unavailable';pp.disabled=true;pn.hidden=true;return}load(idx+1,true)});
     if('mediaSession' in navigator){try{navigator.mediaSession.setActionHandler('play',function(){pp.click()});navigator.mediaSession.setActionHandler('pause',function(){au.pause()});if(list.length>1){navigator.mediaSession.setActionHandler('nexttrack',function(){pn.click()})}}catch(e){}}
+    musicUnlock=function(){
+      if(unlocked||pl.hidden||!au.paused)return;unlocked=true;probing=true;au.muted=true;
+      var p=au.play();
+      if(p&&p.then)p.then(function(){au.pause();au.currentTime=0;au.muted=userMuted}).catch(function(){probing=false;unlocked=false;au.muted=userMuted})
+    };
+    musicStart=function(){
+      if(pl.hidden||!au.paused||pp.disabled)return;
+      ensureCtx();var target=Number(pv.value);au.muted=userMuted;au.volume=0;
+      var p=au.play();
+      var fade=function(){var t0=performance.now();(function f(n){var k=Math.max(0,Math.min(1,(n-t0)/1800));try{au.volume=Math.max(0,Math.min(1,target*k))}catch(x){}if(k<1&&!au.paused)requestAnimationFrame(f);else{try{au.volume=Math.max(0,Math.min(1,target))}catch(x){}}})(t0)};
+      if(p&&p.then)p.then(fade).catch(function(){au.volume=target;pl.classList.add('nudge');toast('Press play for music');setTimeout(function(){pl.classList.remove('nudge')},3200)});else fade()
+    };
     load(idx,false);
   }
   /* The player pill can be dragged (or moved with the arrow keys); its spot is remembered */

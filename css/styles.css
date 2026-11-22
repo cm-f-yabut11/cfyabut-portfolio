@@ -442,3 +442,16 @@ html.vt *{transition:none!important}
 .sc-dots{display:inline-flex;gap:.4rem}
 .sc-dots i{width:.75rem;height:.75rem;border-radius:50%;border:2px solid var(--line)}
 .sc-dots i.on{background:var(--accent);border-color:var(--accent)}
+/* player follows the light or dark theme and the chosen accent color */
+#player{--pbg:#fff;background:var(--pbg);color:var(--ink)}
+:root[data-theme="dark"] #player{--pbg:var(--tint)}
+#pp{background:var(--accent);color:var(--on-accent)}
+.pbars i{background:var(--accent)}
+#pprev,#pnext,#pmute{color:var(--ink)}
+#pprev:hover,#pnext:hover,#pmute:hover{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.ptoggle{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
+.pgrip{color:var(--muted)}
+.pgrip:hover{color:var(--accent)}
+.pseekrow{color:var(--muted)}
+.pseekrow input,.pvolrow input{accent-color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){#player.nudge{animation:pnudge 1s ease-in-out 3}@keyframes pnudge{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}}

@@ -94,3 +94,5 @@ Press `?` (or use the "Shortcuts" button in the footer) to see the keyboard shor
 - The dark mode switch grows outward from the button when the browser supports it (it falls back to an instant switch).
 - The home page background tint shifts through the day on Philippine time.
 - Five secrets can be found; the count shows quietly at the bottom of the shortcuts sheet (press `?`).
+
+**Autoplay and colors:** when a visitor wins the landing game, the music fades in on its own (browsers allow this because the visitor has already clicked Start). Visitors who skip the game, or who return later in the same session, never get autoplay; they press play themselves. If a browser blocks the autoplay, the pill gives a small nudge and a "Press play for music" message. The pill uses the site's light or dark theme and the chosen accent color.

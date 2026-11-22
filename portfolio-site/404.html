@@ -20,7 +20,7 @@ body{display:grid;place-items:center;min-height:100vh;padding:2rem;text-align:ce
 @keyframes rock{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @media (prefers-reduced-motion:reduce){.bug{animation:none}}
 </style>
-<script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
+<script>try{var d=document.documentElement,t=localStorage.getItem('theme'),a=localStorage.getItem('accent');if(t==='dark')d.setAttribute('data-theme','dark');d.setAttribute('data-accent',a||'blue')}catch(e){}</script>
 </head>
 <body>
 <main class="nf" id="main">

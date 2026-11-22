@@ -55,3 +55,42 @@ Everything is in `index.html`. Each page is a `<div data-view="...">`. Add a new
 ## Accessibility notes
 
 The site has a skip link, visible keyboard focus, labelled forms and buttons, alt text on images, and respects the visitor's reduced motion setting. Run Lighthouse in Chrome DevTools after each big change to re-check.
+
+## Colors
+
+The default accent is blue. Visitors can switch to teal, orange, or pink with the dots in the footer; the choice is remembered in their browser. On the three project case studies the blue accent changes to each project's own color (teal for KainSaan, navy for 303 Apparel, green for RiderSafe) unless the visitor picked a different accent.
+
+## Music player
+
+A small white pill with blue soundbars sits in the bottom-left corner when there is music to play.
+
+1. Put your MP3 files in `assets/audio/`.
+2. List them in `assets/audio/playlist.json`, for example `{ "tracks": ["my-song.mp3", "another-song.mp3"] }`. Details are in `assets/audio/README.txt`.
+3. Commit and push. While the list is empty, the pill stays hidden.
+
+Music never starts on its own; visitors press play, and it keeps playing as they move between pages. The soundbars move with the actual music on the deployed site, and fall back to a simple animation when the page is opened straight from disk. Only use music you made or have the right to share publicly.
+
+The pill can be moved: drag it, or focus the dotted handle on its left edge and use the arrow keys (Home resets it). Its position is remembered in the visitor's browser. On phones and tablets, the background eyes are replaced by a pair next to the logo in the header that glances at taps and looks up or down as you scroll.
+
+## Extras
+
+- **Quick jump:** press Ctrl or Cmd plus K (or use the "Quick jump" button in the footer) to jump to any page, project, or action.
+- **Terminal view:** on the About page, "Terminal view" shows the bio as a typed terminal session.
+- **Footer bug:** a small bug walks along the footer line and reacts when clicked.
+- **Hidden code:** typing "debug" (or the Konami code) makes the eyes wink and a few code symbols float up.
+- **Hero name:** on computers, the letters of the name get a little wider and bolder near the cursor.
+- **Music player:** has two states. The small rounded pill shows the play button and title; the arrow button on its right expands it into a larger card with the progress bar, previous and next, and volume. The choice is remembered.
+
+The music pill keeps a small set of soundbars under the title, even in its small state, and drifts a little after you let go of it (visitors who prefer reduced motion get no drift).
+
+Press `?` (or use the "Shortcuts" button in the footer) to see the keyboard shortcuts. On the About page, the dark "Terminal view" button under the title switches the bio to a typed terminal session.
+
+## Creative page
+
+`#creative` shows the campaign posters, the promo video (a poster frame that links to the live 303 Apparel site, because the video file is too large to host here), the project logos, and design tools. The images are in `assets/img/creative/`. To add a poster, copy the image there and add another `<figure>` inside `.posters` in `index.html`.
+
+## Small details
+
+- The dark mode switch grows outward from the button when the browser supports it (it falls back to an instant switch).
+- The home page background tint shifts through the day on Philippine time.
+- Five secrets can be found; the count shows quietly at the bottom of the shortcuts sheet (press `?`).

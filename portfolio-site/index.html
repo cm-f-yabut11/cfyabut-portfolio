@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try{var d=document.documentElement,t=localStorage.getItem('theme'),a=localStorage.getItem('accent');if(t==='dark')d.setAttribute('data-theme','dark');d.setAttribute('data-accent',a||'blue')}catch(e){}</script>
 <title>Clarence Matthew Yabut – Web Developer</title>
 <meta name="description" content="Clarence Matthew Yabut is a web development student in Angeles City building full-stack web apps. See his projects and certifications, and get in touch.">
 <meta name="theme-color" content="#2748ff">
@@ -19,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -33,6 +34,35 @@
   <p id="ghud">Built 0 of 10. Lives: ●●●</p>
 </div>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Enlarged image" hidden><img alt=""><button class="pill" type="button" id="lbx">Close</button></div>
+<div id="player" role="group" aria-label="Music player" hidden>
+  <button class="pgrip" id="pgrip" type="button" aria-label="Move player. Drag it, or use the arrow keys. Press Home to reset." title="Drag to move"><svg viewBox="0 0 8 14" aria-hidden="true"><circle cx="2" cy="2" r="1.3"/><circle cx="6" cy="2" r="1.3"/><circle cx="2" cy="7" r="1.3"/><circle cx="6" cy="7" r="1.3"/><circle cx="2" cy="12" r="1.3"/><circle cx="6" cy="12" r="1.3"/></svg></button>
+  <div class="pctrl">
+    <button id="pprev" type="button" aria-label="Previous track" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5 L9 12 L18 19 Z M8 5 H5.5 V19 H8 Z"/></svg></button>
+    <button id="pp" type="button" aria-label="Play music"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 L19 12 L8 19 Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+    <button id="pnext" type="button" aria-label="Next track" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5 L15 12 L6 19 Z M16 5h2.5v14H16z"/></svg></button>
+  </div>
+  <div class="pinfo"><span id="ptitle" class="ptitle">Music</span><div class="pbars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+  <button id="ptoggle" class="ptoggle" type="button" aria-expanded="false" aria-label="Expand player"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15 L12 9 L18 15"/></svg></button>
+  <div class="pseekrow"><span id="ptime">0:00</span><input id="pseek" type="range" min="0" max="1000" value="0" aria-label="Seek" disabled><span id="pdur">0:00</span></div>
+  <div class="pvolrow"><button id="pmute" type="button" aria-label="Mute" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 9 Q19 12 16 15 M18.5 6.5 Q23 12 18.5 17.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input id="pvol" type="range" min="0" max="1" step="0.05" value="0.6" aria-label="Volume"></div>
+</div>
+<audio id="paudio" preload="none"></audio>
+<div id="cmdk" role="dialog" aria-modal="true" aria-label="Quick jump" hidden>
+  <div class="cmdk-box"><input id="cmdq" type="text" role="combobox" aria-expanded="true" aria-controls="cmdl" aria-autocomplete="list" placeholder="Jump to a page, project, or action" autocomplete="off" spellcheck="false"><ul id="cmdl" role="listbox" aria-label="Results"></ul></div>
+</div>
+<div id="keys" role="dialog" aria-modal="true" aria-labelledby="keys-h" hidden>
+  <div class="keys-box"><div class="keys-head"><h2 id="keys-h">Keyboard shortcuts</h2><button id="keys-x" type="button" aria-label="Close shortcuts">Esc</button></div>
+  <dl class="keys-list">
+    <div><dt><kbd>Ctrl</kbd> <kbd>K</kbd> <span class="or">or</span> <kbd>⌘</kbd> <kbd>K</kbd></dt><dd>Quick jump to any page, project, or action</dd></div>
+    <div><dt><kbd>?</kbd></dt><dd>Show this list</dd></div>
+    <div><dt><kbd>Esc</kbd></dt><dd>Close whatever is open</dd></div>
+    <div><dt><kbd>Tab</kbd></dt><dd>Move between controls. The first stop is “Skip to content”</dd></div>
+    <div><dt><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd></dt><dd>Move the music pill, after focusing its dotted handle. <kbd>Home</kbd> puts it back</dd></div>
+    <div><dt><kbd>?</kbd><span class="q">?</span></dt><dd>There are secrets hidden around the site. Try typing what you say when something breaks.</dd></div>
+  </dl>
+  <p class="secrets" id="secrets"><span>Secrets found: <b id="sc-n">0</b> of 5</span><span class="sc-dots" id="sc-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></p></div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
 <div id="prog" aria-hidden="true"></div>
 <div id="ring" aria-hidden="true"></div>
 <div class="eyes" id="eyes" aria-hidden="true"></div>
@@ -40,8 +70,10 @@
   <button class="skip" type="button" id="skip">Skip to content</button>
   <header class="top">
     <a class="logo" href="#home" aria-label="Clarence Yabut, home"><svg viewBox="125 200 385 180" fill="none" stroke-width="14" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path d="M245 217 L160 292 L245 367" stroke="currentColor"/><path class="sl" d="M335 217 L268 367" stroke="var(--accent)"/><path d="M358 218 L413 270 M497 215 L347 367" stroke="currentColor"/></svg></a>
+    <span class="eyepair" aria-hidden="true"><i class="heye"><b class="pupil"></b></i><i class="heye"><b class="pupil"></b></i></span>
     <nav aria-label="Main">
       <a href="#work">Work</a>
+      <a href="#creative">Creative</a>
       <a href="#about">About</a>
       <a href="#certifications">Certifications</a>
       <a href="#recommendations">Recommendations</a>
@@ -52,11 +84,11 @@
 
   <main id="main" tabindex="-1">
     <div data-view="home" data-title="Home">
-      <div class="hero">
+      <div class="hero"><div class="skyglow" aria-hidden="true"></div><div class="glow" aria-hidden="true"></div>
         <svg class="hero-mark" viewBox="125 200 385 180" fill="none" stroke-width="10" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path pathLength="1" d="M245 217 L160 292 L245 367" stroke="currentColor"/><path pathLength="1" d="M335 217 L268 367" stroke="var(--accent)"/><path pathLength="1" d="M358 218 L413 270" stroke="currentColor"/><path pathLength="1" d="M497 215 L347 367" stroke="currentColor"/></svg>
         <h1 class="name" tabindex="-1">Clarence <span>Yabut</span></h1>
         <p class="lede">I build web apps from the database up, and I care how they feel to use.</p>
-        <p class="status"><i aria-hidden="true"></i><span><b>Open to work:</b> entry-level, part-time, freelance, and remote. I’m in Angeles City, where it’s <b id="clock">–</b> right now.</span></p>
+        <p class="status"><i aria-hidden="true"></i><span><b>Open to work:</b> entry-level, part-time, freelance, and remote. I’m in Angeles City, where it’s <b id="clock">–</b> right now<span id="phase"></span>.</span></p>
         <a class="cta" href="#work">See my work</a><a class="cta alt" href="#contact">Get in touch</a>
       </div>
       <div class="page">
@@ -160,10 +192,33 @@
       <p>The admin page has no login yet, so anyone who knows its address can open it. I left its link off this site on purpose. Next I’d add a login, move search and pagination to the server, add photos and opening hours, and keep an activity log of changes.</p>
     </div>
 
+    <div class="page" data-view="creative" data-title="Creative" hidden>
+      <div class="phead"><div><h1 tabindex="-1">Creative</h1><p class="kicker">Posters, video, and visual work from my projects.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M16 22 H92 V86 H16 Z" style="animation-delay:.1s"/><path pathLength="1" d="M12 18 H88 V82 H12 Z" style="animation-delay:.15s"/><path pathLength="1" class="acc" stroke="var(--accent)" d="M12 72 L36 46 L52 62 L64 50 L88 76" style="animation-delay:.3s"/><circle class="fx acc" cx="70" cy="36" r="7" fill="var(--accent)" stroke="none" style="animation-delay:.6s"/></svg></div>
+      <h2>Campaign posters</h2>
+      <p>For the 303 Apparel “Cop the Drop” launch I made the promotional posters. They appear as sample posts on the campaign page, laid out the way they would look on Instagram and TikTok.</p>
+      <div class="posters"><figure><button class="zoom" type="button" aria-label="View larger: Cop the Drop"><img src="assets/img/creative/poster-cop-the-drop.jpg" alt="Cop the Drop poster: a person in black with a hand raised, on a navy pattern" loading="lazy" decoding="async"></button><figcaption>Cop the Drop</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: 303 Apparel"><img src="assets/img/creative/poster-ccdmsy.jpg" alt="303 Apparel poster on a paper-textured background with a model in a dark shirt" loading="lazy" decoding="async"></button><figcaption>303 Apparel</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: Dropping Soon"><img src="assets/img/creative/poster-dropping-soon.jpg" alt="Dropping Soon poster with a model in a green jacket and a 15 percent discount" loading="lazy" decoding="async"></button><figcaption>Dropping Soon</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: Iconic"><img src="assets/img/creative/poster-iconic.jpg" alt="Iconic poster: a figure in a cap and jacket on blue, with large letters behind" loading="lazy" decoding="async"></button><figcaption>Iconic</figcaption></figure><figure><button class="zoom" type="button" aria-label="View larger: 303rd Magazine"><img src="assets/img/creative/poster-magazine.jpg" alt="303rd Magazine cover with a model walking through a mall" loading="lazy" decoding="async"></button><figcaption>303rd Magazine</figcaption></figure></div>
+      <h2>Promotional video</h2>
+      <p>I shot and edited the promo for the same campaign: about a minute and a half of camcorder-style footage with a “Cop the Drop” title card. It plays on the 303 Apparel home page.</p>
+      <a class="vid" href="https://three03apparel-store.onrender.com/index.html" target="_blank" rel="noopener" aria-label="Watch the promotional video on the 303 Apparel site"><img src="assets/img/creative/promo-video-poster.jpg" alt="Still from the promo video: a group of friends behind a Cop The Drop title card, with camcorder date and time overlay" loading="lazy" decoding="async"><span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 L19 12 L8 19 Z"/></svg>Watch on the live site</span></a>
+      <h2>Logos from my projects</h2>
+      <div class="logos">
+        <figure><div class="logomark"><svg viewBox="125 200 385 180" fill="none" stroke-width="14" stroke-linejoin="miter" stroke-linecap="butt" role="img" aria-label="My logo"><path d="M245 217 L160 292 L245 367" stroke="currentColor"/><path d="M335 217 L268 367" stroke="var(--accent)"/><path d="M358 218 L413 270 M497 215 L347 367" stroke="currentColor"/></svg></div><figcaption>My logo</figcaption></figure>
+        <figure><img src="assets/img/303-apparel-logo.jpg" alt="303 Apparel logo" loading="lazy" decoding="async"><figcaption>303 Apparel</figcaption></figure>
+        <figure><img src="assets/img/kainsaan-logo.jpg" alt="KainSaan logo" loading="lazy" decoding="async"><figcaption>KainSaan</figcaption></figure>
+        <figure><img src="assets/img/ridersafe-logo.jpg" alt="RiderSafe logo" loading="lazy" decoding="async"><figcaption>RiderSafe</figcaption></figure>
+      </div>
+      <h2>Tools</h2>
+      <ul class="stack" aria-label="Design and media tools"><li>Figma</li><li>Canva</li><li>CapCut</li><li>Clipchamp</li></ul>
+      <p>I’ve also finished courses in graphic design, UI and UX basics, Figma, and website UI design, plus content marketing and digital advertising. <a href="#certifications">See the certifications</a>.</p>
+      <p>Have a poster, video, or interface to design? <a href="#contact">Tell me about it</a>.</p>
+    </div>
+
     <div class="page" data-view="about" data-title="About" hidden>
       <div class="phead"><div><h1 tabindex="-1">About</h1><p class="kicker">A student developer who likes the whole stack.</p></div><svg class="pico" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="butt" aria-hidden="true"><path class="echo" pathLength="1" d="M16 28 H92 V80 H16 Z" style="animation-delay:.1s"/><path pathLength="1" d="M12 24 H88 V76 H12 Z" style="animation-delay:0.15s"/><path pathLength="1" d="M20 32 H46 V68 H20 Z" stroke-width="3" style="animation-delay:0.26s"/><circle class="fx" cx="28" cy="45" r="4.2" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" style="animation-delay:0.37s"/><circle class="fx" cx="38" cy="45" r="4.2" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" style="animation-delay:0.48s"/><circle class="fx acc" cx="29" cy="46" r="1.8" fill="var(--accent)" stroke="none" style="animation-delay:0.59s"/><circle class="fx acc" cx="39" cy="46" r="1.8" fill="var(--accent)" stroke="none" style="animation-delay:0.7s"/><path pathLength="1" d="M22 68 L33 58 L44 68" stroke-width="3" style="animation-delay:0.81s"/><path pathLength="1" d="M54 36 H80" class="acc" stroke="var(--accent)" style="animation-delay:0.92s"/><path pathLength="1" d="M54 48 H78" style="animation-delay:1.03s"/><path pathLength="1" d="M54 60 H70" style="animation-delay:1.14s"/></svg></div>
-      <p>I’m a third-year BSIT Web Development student at Holy Angel University. I build projects with HTML, CSS, JavaScript, PHP, and databases, and I also design in Figma and create content.</p>
-      <p>Before tech, I worked at school bazaars and on a student council events team, which taught me sales, customer service, and working with a group. I speak English, Filipino, and Kapampangan.</p>
+      <p class="termtoggle"><button class="termbtn" id="termBtn" type="button" aria-pressed="false"><span class="ti" aria-hidden="true">&gt;_</span><span class="tl">Terminal view</span></button></p>
+      <div id="bio"><p>I’m a third-year BSIT Web Development student at Holy Angel University. I build projects with HTML, CSS, JavaScript, PHP, and databases, and I also design in Figma and create content.</p>
+      <p>Before tech, I worked at school bazaars and on a student council events team, which taught me sales, customer service, and working with a group. I speak English, Filipino, and Kapampangan.</p></div>
+      <div id="term" aria-hidden="true" hidden><div class="tbar"><i></i><i></i><i></i><span>~/about</span></div><div id="termOut" class="tout"></div></div>
       <h2>Skills</h2>
       <div class="filters" role="group" aria-label="Filter skills"><button class="pill" type="button" data-f="all" aria-pressed="true">All</button><button class="pill" type="button" data-f="web" aria-pressed="false">Web</button><button class="pill" type="button" data-f="data" aria-pressed="false">Databases</button><button class="pill" type="button" data-f="design" aria-pressed="false">Design</button></div>
       <ul class="stack" aria-label="Skills">
@@ -225,9 +280,9 @@
     </div>
   </main>
 
-  <footer><div class="now"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Angeles City, <b id="clock2">–</b>. Open to work.</span><a class="dl" href="assets/Clarence-Yabut-Resume.pdf" download data-deploy-only>Download resume</a></div><span>© 2026 Clarence Matthew Yabut</span><div class="tools">
+  <footer><div class="pet" id="pet" aria-hidden="true"><div class="bubble"></div><div class="pw"><svg viewBox="0 0 34 26" width="34" height="26"><g fill="none" stroke="var(--sos)" stroke-width="1.8" stroke-linecap="round"><g class="lg lg1"><path d="M9 14 L3 11 M9 17 L2 18 M10 20 L5 24"/><path d="M25 14 L31 11 M25 17 L32 18 M24 20 L29 24"/></g><path d="M13 8 L10 3 M21 8 L24 3"/></g><ellipse cx="17" cy="15" rx="10" ry="8" fill="var(--sos)"/><circle class="peye" cx="13.3" cy="12.5" r="3.1" fill="#fff"/><circle class="peye" cx="20.7" cy="12.5" r="3.1" fill="#fff"/><circle class="ppup" cx="13.3" cy="12.8" r="1.5" fill="#0f1b33"/><circle class="ppup" cx="20.7" cy="12.8" r="1.5" fill="#0f1b33"/></svg></div></div><div class="now"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Angeles City, <b id="clock2">–</b>. Open to work.</span><a class="dl" href="assets/Clarence-Yabut-Resume.pdf" download data-deploy-only>Download resume</a></div><span>© 2026 Clarence Matthew Yabut</span><div class="tools">
       <button class="pill" id="eyeBtn" type="button" aria-pressed="true">Eyes on</button>
-      <button class="pill" id="inspect" type="button" aria-pressed="false">Show page structure</button>
+      <button class="pill" id="inspect" type="button" aria-pressed="false">Show page structure</button><button class="pill" id="kbtn" type="button">Quick jump</button><button class="pill" id="khelp" type="button">Shortcuts</button><span class="swatches" role="group" aria-label="Accent color"><button class="accsw" type="button" data-accent="blue" style="--c:#2748ff" aria-label="Blue accent" aria-pressed="false"></button><button class="accsw" type="button" data-accent="teal" style="--c:#0b7263" aria-label="Teal accent" aria-pressed="false"></button><button class="accsw" type="button" data-accent="orange" style="--c:#b8470a" aria-label="Orange accent" aria-pressed="false"></button><button class="accsw" type="button" data-accent="pink" style="--c:#b8175a" aria-label="Pink accent" aria-pressed="false"></button></span>
     </div><a id="next" href="#work">Next: Work</a></footer>
 </div>
 <script src="js/main.js"></script>

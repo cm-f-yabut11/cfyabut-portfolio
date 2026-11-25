@@ -96,3 +96,13 @@ Press `?` (or use the "Shortcuts" button in the footer) to see the keyboard shor
 - Five secrets can be found; the count shows quietly at the bottom of the shortcuts sheet (press `?`).
 
 **Autoplay and colors:** when a visitor wins the landing game, the music fades in on its own (browsers allow this because the visitor has already clicked Start). Visitors who skip the game, or who return later in the same session, never get autoplay; they press play themselves. If a browser blocks the autoplay, the pill gives a small nudge and a "Press play for music" message. The pill uses the site's light or dark theme and the chosen accent color.
+
+## Opening screen and game
+
+New visitors first see a short opening screen (your logo draws itself, then your name and role) with two choices: "Play a quick game" or "Enter the portfolio". The game, "Compile the portfolio", has a 3-2-1 countdown, falling closing tags to catch, bugs to dodge, coffee cups that slow everything down for a few seconds, and a final `</html>` tag to close the document. Winning fades in the music (if you have any). Escape or "Skip to portfolio" leaves at any time. Visitors who have already seen it in this browser session go straight to the site.
+
+## Tidy-up notes
+
+The footer shows only Quick jump, the accent dots, and the next-page link. The eyes toggle, "Show page structure", and the shortcuts sheet are in Quick jump (Ctrl or Cmd plus K), under Actions. Screenshots on the Work page sit behind a "Screenshots" toggle. Background eyes hide themselves on narrower screens so they never sit on top of text.
+
+**Game stages:** the game now runs through four short stages (HTML, CSS, JavaScript, Deploy). Each has its own tags and background code, and the hazards change: tags sway in CSS, bugs zigzag, and "<<<<" merge conflicts appear in JavaScript. Coffee slows everything down, a shield blocks one bug, and each catch fills in a block of a small page shown below the game, which lights up when the build is live.

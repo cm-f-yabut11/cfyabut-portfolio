@@ -442,3 +442,59 @@ html.vt *{transition:none!important}
 .sc-dots{display:inline-flex;gap:.4rem}
 .sc-dots i{width:.75rem;height:.75rem;border-radius:50%;border:2px solid var(--line)}
 .sc-dots i.on{background:var(--accent);border-color:var(--accent)}
+/* player follows the light or dark theme and the chosen accent color */
+#player{--pbg:#fff;background:var(--pbg);color:var(--ink)}
+:root[data-theme="dark"] #player{--pbg:var(--tint)}
+#pp{background:var(--accent);color:var(--on-accent)}
+.pbars i{background:var(--accent)}
+#pprev,#pnext,#pmute{color:var(--ink)}
+#pprev:hover,#pnext:hover,#pmute:hover{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.ptoggle{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
+.pgrip{color:var(--muted)}
+.pgrip:hover{color:var(--accent)}
+.pseekrow{color:var(--muted)}
+.pseekrow input,.pvolrow input{accent-color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){#player.nudge{animation:pnudge 1s ease-in-out 3}@keyframes pnudge{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}}
+/* ---- opening screen and game ---- */
+#game.intro-on #gskip{visibility:hidden}
+#game section{display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%}
+#game section[hidden]{display:none}
+#intro{margin-top:min(9vh,5rem);text-align:center;gap:1.1rem}
+.intro-logo{width:min(56vw,14rem);height:auto;color:var(--ink)}
+.intro-logo path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s ease-out forwards}
+.intro-logo path:nth-child(2){animation-delay:.2s}.intro-logo path:nth-child(3){animation-delay:.4s}.intro-logo path:nth-child(4){animation-delay:.5s}
+#game .iname{font:800 clamp(2.8rem,10vw,4.8rem)/.95 var(--display);letter-spacing:-.045em;margin:0;text-align:center}
+#game .iname span{display:block;color:transparent;-webkit-text-stroke:2px var(--ink)}
+.intro-role{margin:0;font:500 clamp(1.05rem,2.6vw,1.35rem) var(--display);color:var(--muted)}
+.intro-actions{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem}
+.intro-hint{margin:.2rem 0 0;font:500 .95rem var(--display);color:var(--muted)}
+.gbar{width:min(640px,calc(100vw - 2rem));height:.5rem;background:var(--tint);border-radius:.25rem;overflow:hidden}
+.gbar i{display:block;height:100%;width:0;background:var(--accent);border-radius:.25rem;transition:width .25s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:no-preference){#game .iname{animation:fadeup .6s ease-out .7s backwards}.intro-role{animation:fadeup .5s ease-out .95s backwards}.intro-actions{animation:fadeup .5s ease-out 1.1s backwards}.intro-hint{animation:fadeup .5s ease-out 1.25s backwards}}
+@media (prefers-reduced-motion:reduce){.intro-logo path{animation:none;stroke-dashoffset:0}}
+/* ---- tidy-up ---- */
+.shots-d{margin-top:1rem}
+.shots-d summary{cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;font:600 .95rem var(--display);color:var(--ink);list-style:none;padding:.15rem 0}
+.shots-d summary::-webkit-details-marker{display:none}
+.shots-d summary::before{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg);transition:transform .2s}
+.shots-d[open] summary::before{transform:rotate(45deg)}
+.shots-d .strip-wrap{margin-top:.6rem}
+@media (hover:none){.strip-ctl{display:none}}
+.pico{width:clamp(3rem,8vw,5rem)}
+@media (max-width:640px){
+  #player:not(.exp) .ptitle{display:none}
+  header.top nav{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:4px 2px;margin:-4px -2px;-webkit-mask-image:linear-gradient(to right,#000 86%,transparent);mask-image:linear-gradient(to right,#000 86%,transparent)}
+  header.top nav::-webkit-scrollbar{display:none}
+}
+/* ---- game: the page you are building ---- */
+.grow{display:flex;align-items:center;gap:1.1rem;width:min(640px,calc(100vw - 2rem))}
+.grow #ghud{margin:0;text-align:left;flex:1}
+.gpage{flex:none;width:9.5rem;height:6.2rem;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(7,1fr);gap:3px;padding:6px;border:2px solid var(--line);border-radius:.4rem;background:var(--paper);transition:box-shadow .4s,border-color .4s}
+.gpage .b{border:1.5px dashed var(--line);border-radius:2px;transition:background .25s,border-color .25s}
+.gpage .b:nth-child(1){grid-area:1/1/2/2}.gpage .b:nth-child(2){grid-area:1/3/2/7}.gpage .b:nth-child(3){grid-area:2/1/3/5}.gpage .b:nth-child(4){grid-area:3/1/4/4}.gpage .b:nth-child(5){grid-area:4/1/5/3}
+.gpage .b:nth-child(6){grid-area:2/5/5/7}.gpage .b:nth-child(7){grid-area:5/1/7/3}.gpage .b:nth-child(8){grid-area:5/3/7/5}.gpage .b:nth-child(9){grid-area:5/5/7/7}.gpage .b:nth-child(10){grid-area:7/1/8/7}
+.gpage .b.on{background:var(--accent);border:1.5px solid var(--accent)}
+.gpage.done{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent),0 0 22px color-mix(in srgb,var(--accent) 45%,transparent)}
+@media (prefers-reduced-motion:no-preference){.gpage .b.pop{animation:bpop .4s ease-out}@keyframes bpop{0%{transform:scale(.5);opacity:.3}60%{transform:scale(1.15)}100%{transform:scale(1)}}}
+.shots-d.closing summary::before{transform:rotate(-45deg)}
